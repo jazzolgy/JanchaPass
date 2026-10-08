@@ -1,0 +1,6 @@
+name = "janchapass"
+main = "worker/naver-search.js"
+compatibility_date = "2026-10-08"
+
+[vars]
+ALLOWED_ORIGIN = "https://jazzolgy.github.io"
