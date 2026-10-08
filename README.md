@@ -36,3 +36,9 @@ Settings → Pages → Build and deployment → **Deploy from a branch** → **m
 5. 실패하면 **어느 단계에서**, **표시된 오류 메시지**, **iGPSPORT 앱 버전**을 기록합니다.
 
 주의: 앱 메뉴명·GPX 가져오기 가능 여부는 iGPSPORT 앱 버전에 따라 다를 수 있습니다. 제조사 직접 클라우드 동기화 기능은 구현되지 않았습니다.
+
+## BSC500 end-to-end validation (2026-10-08)
+
+**Confirmed by user on actual iPhone and iGPSPORT BSC500:** JanchaPass GPX downloaded on iPhone → imported into iGPSPORT app → transferred to BSC500 → applied as navigation route.
+
+**Not yet verified:** on-road turn-by-turn cue accuracy, off-route alerts, rerouting, long-distance track handling, Garmin/BiNavi compatibility, map SDK authentication. This is manual GPX import, **not** a direct manufacturer API integration.
