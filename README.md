@@ -68,3 +68,7 @@ Open `https://jazzolgy.github.io/Janchpass/` in Chrome. Chrome menu → **Add to
 ## Naver Dynamic Map live validation (2026-10-08)
 
 User confirmed Naver Maps SDK successfully renders on deployed JanchaPass site using their own browser Client ID. **Do not commit Client Secret.** The ID has not been provided to the repository, so automatic Naver map startup is not yet configured. Pending: tap-to-select points on Naver map, Valhalla route overlay and GPX export; Android device verification; Kakao SDK credential test.
+
+## Search UX improvement (2026-10-08)
+
+The search UI still uses public OSM Nominatim, **not Naver Places Search**. Search results now pan/zoom the currently selected Naver/Kakao/Google/OSM map without switching providers and support direct assignment to start/end/waypoints. Press Enter to search. Basic client-side 1.1-second search throttling added, but this does **not** make the public Nominatim service suitable for production/multi-user traffic. Real Naver business/POI search requires evaluating a licensed search API and, where secrets are needed, a server-side proxy; never place API secrets in this public repository. Third-party search result overlays on Naver maps require licensing review.
