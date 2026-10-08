@@ -64,3 +64,7 @@ Browser SDK keys are publicly visible to anyone visiting the site. Use provider-
 ### Android
 
 Open `https://jazzolgy.github.io/Janchpass/` in Chrome. Chrome menu → **Add to Home screen** or **Install app** if offered. Create a route → download GPX → use the phone's Files/Downloads or Share menu to import to the device maker's app. Manufacturer app import steps depend on Android version and vendor app; not yet verified on a real Android phone.
+
+## Naver Dynamic Map live validation (2026-10-08)
+
+User confirmed Naver Maps SDK successfully renders on deployed JanchaPass site using their own browser Client ID. **Do not commit Client Secret.** The ID has not been provided to the repository, so automatic Naver map startup is not yet configured. Pending: tap-to-select points on Naver map, Valhalla route overlay and GPX export; Android device verification; Kakao SDK credential test.
