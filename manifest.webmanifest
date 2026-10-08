@@ -1,0 +1,18 @@
+{
+  "name": "JanchaPass · 잔차패스",
+  "short_name": "JanchaPass",
+  "description": "자전거 경로 제작 및 GPX 다운로드",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#102b3b",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
