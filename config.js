@@ -3,5 +3,5 @@
 // NEVER put REST API secrets, admin keys, or private tokens here.
 window.JANCHA_MAP_KEYS = { naver: '', kakao: '', google: '' };
 
-// Public Worker endpoint only (no credentials). Set after deploying worker.
-window.JANCHA_SEARCH_API_URL = '';
+// Public Cloudflare Worker endpoint for Naver local place search (no credentials).
+window.JANCHA_SEARCH_API_URL = 'https://janchapass.musehh.workers.dev';
