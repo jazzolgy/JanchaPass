@@ -72,3 +72,18 @@ User confirmed Naver Maps SDK successfully renders on deployed JanchaPass site u
 ## Search UX improvement (2026-10-08)
 
 The search UI still uses public OSM Nominatim, **not Naver Places Search**. Search results now pan/zoom the currently selected Naver/Kakao/Google/OSM map without switching providers and support direct assignment to start/end/waypoints. Press Enter to search. Basic client-side 1.1-second search throttling added, but this does **not** make the public Nominatim service suitable for production/multi-user traffic. Real Naver business/POI search requires evaluating a licensed search API and, where secrets are needed, a server-side proxy; never place API secrets in this public repository. Third-party search result overlays on Naver maps require licensing review.
+
+## Commercial architecture setup (2026-10-08)
+
+The public interface hides map-provider and API-key input controls. **Important:** Naver Maps is automatically enabled only after setting the **browser-public, domain-restricted** Naver Maps Client ID in `config.js` (`window.JANCHA_MAP_KEYS.naver`). Without it, the site falls back to OSM.
+
+Naver local search now expects `window.JANCHA_SEARCH_API_URL` in `config.js`, set to the deployed Cloudflare Worker base URL, e.g. `https://<worker-name>.<account>.workers.dev`. Until this is configured, the search UI explicitly says the search service is not connected; there is no misleading OSM search fallback.
+
+1. Create a Cloudflare Worker with `worker/naver-search.js`.
+2. Configure Worker **secrets** `NAVER_SEARCH_CLIENT_ID` and `NAVER_SEARCH_CLIENT_SECRET` using the **NAVER API HUB / 지역** application credentials (these are distinct from the Maps SDK ID). Never put secrets in GitHub, the frontend, or chat.
+3. Configure `ALLOWED_ORIGIN=https://jazzolgy.github.io` as a Worker environment variable.
+4. Test Worker `/health` (only reports configuration status) and `/api/search?query=운길산역` (with browser Origin) then put Worker base URL in `config.js`.
+5. Test actual Naver Local API response coordinates, Korean POI quality, map markers, GPX route, iPhone and Android. Review NAVER Maps/Search license compatibility.
+6. Add WAF/rate limiting, monitoring, error handling, privacy policy, billing alerts and replace public Valhalla/Nominatim infrastructure before a commercial launch.
+
+`/admin/` is **not an authenticated admin panel**: it is an informational placeholder only. Do not place secrets or privileged controls there. Create a separate access-controlled dashboard (Cloudflare Access or authenticated backend) when operations are ready. No production readiness is claimed.
