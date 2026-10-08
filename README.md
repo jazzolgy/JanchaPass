@@ -42,3 +42,25 @@ Settings → Pages → Build and deployment → **Deploy from a branch** → **m
 **Confirmed by user on actual iPhone and iGPSPORT BSC500:** JanchaPass GPX downloaded on iPhone → imported into iGPSPORT app → transferred to BSC500 → applied as navigation route.
 
 **Not yet verified:** on-road turn-by-turn cue accuracy, off-route alerts, rerouting, long-distance track handling, Garmin/BiNavi compatibility, map SDK authentication. This is manual GPX import, **not** a direct manufacturer API integration.
+
+## v1.1 mobile + map provider setup
+
+The app now includes a web manifest, scalable icon, responsive Android/iOS touch layout, and `config.js` for browser-public map SDK credentials. GitHub Pages serves the same URL on Android Chrome and iPhone Safari. **Android hardware transfer has not been tested yet.** This is a PWA shell, not a Play Store native app; offline route calculation is not supported.
+
+### Naver Maps
+
+1. In Naver Cloud Platform create a Maps application with **Dynamic Map** (Web SDK) enabled, subject to the provider's current product/approval requirements.
+2. Register the actual service origin `https://jazzolgy.github.io` in the provider's permitted web origins (follow the provider's current exact URL/origin registration rules).
+3. Put the browser-public Maps **ncpKeyId** in `config.js` as `naver`. Never use a secret key.
+
+### Kakao Maps
+
+1. In Kakao Developers create an app and enable the **JavaScript Maps SDK** for the current service, following its current permissions and billing policies.
+2. Register the web site domain/origin `https://jazzolgy.github.io` as required by Kakao Developers.
+3. Put the **JavaScript key** (not REST/admin key) in `config.js` as `kakao`.
+
+Browser SDK keys are publicly visible to anyone visiting the site. Use provider-side domain restrictions, monitor usage and quotas, and do not store secret credentials in this public repository. No actual SDK credentials have been supplied or validated. If keys are blank, OSM is used automatically. Naver and Kakao maps are display SDKs here; route geometry still comes from public Valhalla, so provider license terms for third-party overlays need review before commercial launch.
+
+### Android
+
+Open `https://jazzolgy.github.io/Janchpass/` in Chrome. Chrome menu → **Add to Home screen** or **Install app** if offered. Create a route → download GPX → use the phone's Files/Downloads or Share menu to import to the device maker's app. Manufacturer app import steps depend on Android version and vendor app; not yet verified on a real Android phone.
