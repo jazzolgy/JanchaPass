@@ -15,8 +15,8 @@ export default {
   if(!env.NAVER_SEARCH_CLIENT_ID||!env.NAVER_SEARCH_CLIENT_SECRET)return json({error:'Search not configured'},503,allowed);
   // NOTE: add Cloudflare WAF / rate limiting before commercial launch.
   try{
-   const api='https://openapi.naver.com/v1/search/local.json?'+new URLSearchParams({query,display:'5',start:'1',sort:'random'});
-   const response=await fetch(api,{headers:{'X-Naver-Client-Id':env.NAVER_SEARCH_CLIENT_ID,'X-Naver-Client-Secret':env.NAVER_SEARCH_CLIENT_SECRET,'Accept':'application/json'}});
+   const api='https://naverapihub.apigw.ntruss.com/search/v1/local?'+new URLSearchParams({query,display:'5',start:'1',sort:'random',format:'json'});
+   const response=await fetch(api,{headers:{'X-NCP-APIGW-API-KEY-ID':env.NAVER_SEARCH_CLIENT_ID,'X-NCP-APIGW-API-KEY':env.NAVER_SEARCH_CLIENT_SECRET,'Accept':'application/json'}});
    if(!response.ok)return json({error:'Naver search unavailable'},502,allowed);
    const data=await response.json();
    const items=(data.items||[]).map(p=>{
